@@ -1,7 +1,6 @@
-// Buscamina.js
-
 import React, { useState, useEffect } from 'react';
 import './buscamina.css';
+import bombImage from './bomba.png';
 
 function Buscamina({ difficulty, playerName }) {
   const [boardSize, setBoardSize] = useState(0);
@@ -9,6 +8,7 @@ function Buscamina({ difficulty, playerName }) {
   const [board, setBoard] = useState([]);
   const [gameOver, setGameOver] = useState(false);
   const [points, setPoints] = useState(0);
+  const [flags, setFlags] = useState(0);
 
   useEffect(() => {
     setDifficultySettings();
@@ -42,6 +42,7 @@ function Buscamina({ difficulty, playerName }) {
       Array.from({ length: boardSize }, () => ({
         isMine: false,
         revealed: false,
+        flagged: false,
         nearbyMines: 0,
       }))
     );
@@ -95,11 +96,22 @@ function Buscamina({ difficulty, playerName }) {
     if (gameOver || board[x][y].revealed) return;
 
     if (board[x][y].isMine) {
+      revealAllMines();
       setGameOver(true);
     } else {
       revealCell(x, y);
       setPoints(points + 10);
     }
+  };
+
+  const handleRightClick = (e, x, y) => {
+    e.preventDefault();
+    if (gameOver || board[x][y].revealed) return;
+
+    const newBoard = [...board];
+    newBoard[x][y].flagged = !newBoard[x][y].flagged;
+    setBoard(newBoard);
+    setFlags(flags + (newBoard[x][y].flagged ? 1 : -1));
   };
 
   const revealCell = (x, y) => {
@@ -108,22 +120,34 @@ function Buscamina({ difficulty, playerName }) {
     setBoard(newBoard);
   };
 
+  const revealAllMines = () => {
+    const newBoard = [...board];
+    for (let x = 0; x < boardSize; x++) {
+      for (let y = 0; y < boardSize; y++) {
+        if (newBoard[x][y].isMine) {
+          newBoard[x][y].revealed = true;
+        }
+      }
+    }
+    setBoard(newBoard);
+  };
+
   return (
     <div className="buscamina">
       <h1>Buscaminas</h1>
       <h2>Points: {points}</h2>
+      <h2>Flags: {flags}</h2>
       <div className="board">
         {board.map((row, x) => (
           <div key={x} className="row">
             {row.map((cell, y) => (
               <div
                 key={y}
-                className={`cell ${cell.revealed ? 'revealed' : ''} ${
-                  cell.isMine && gameOver ? 'mine' : ''
-                }`}
+                className={`cell ${cell.revealed ? 'revealed' : ''} ${cell.flagged ? 'flagged' : ''} ${cell.isMine && gameOver ? 'mine' : ''}`}
                 onClick={() => handleCellClick(x, y)}
+                onContextMenu={(e) => handleRightClick(e, x, y)}
               >
-                {cell.revealed ? (cell.isMine ? '💣' : cell.nearbyMines || '') : ''}
+                {cell.revealed ? (cell.isMine ? <img className='img' src="bomba.png" alt="aa" /> : (cell.nearbyMines > 0 ? cell.nearbyMines : '')) : (cell.flagged ? '🚩' : '')}
               </div>
             ))}
           </div>
