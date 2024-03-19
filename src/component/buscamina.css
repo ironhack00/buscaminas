@@ -1,0 +1,36 @@
+/* Buscamina.css */
+.buscamina {
+    text-align: center;
+    font-family: Arial, sans-serif;
+  }
+  
+  .board {
+    display: inline-block;
+    border: 2px solid black;
+    margin: 20px;
+  }
+  
+  .row {
+    display: flex;
+  }
+  
+  .cell {
+    width: 30px;
+    height: 30px;
+    border: 1px solid black;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+  
+  .cell.revealed {
+    background-color: lightgray;
+  }
+  
+  .cell.mine {
+    background-color: red;
+    color: white;
+  }
+  
