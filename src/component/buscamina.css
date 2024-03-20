@@ -2,8 +2,13 @@
   text-align: center;
   margin: 0 auto;
   background-color: rgba(91, 89, 89, 0.264);
-  width: 50%;
+  width: 80%; /* Modificamos el ancho para que se ajuste mejor en dispositivos móviles */
+  padding: 20px; /* Agregamos un poco de espacio interno */
+  border-radius: 10px; /* Agregamos bordes redondeados */
 }
+
+@media (max-width: 600px) {}
+
 
 h1 {
   font-size: 2.5rem;
@@ -50,6 +55,11 @@ h2 {
 }
 
 @media (max-width: 600px) {
+  .buscamina {
+    width: 90%; /* Reducimos el ancho aún más en dispositivos móviles */
+    padding: 10px; /* Reducimos el espacio interno */
+  }
+
   .cell {
     width: 30px;
     height: 30px;
@@ -65,7 +75,14 @@ h2 {
   }
 }
 
+
 .img{
   width: 50%;
   height: 50%;
+}
+
+@media (max-width: 1820px) and (max-height: 800px) {
+  .buscamina {
+    background-color: transparent; /* Eliminamos el background-color en pantallas más pequeñas */
+  }
 }
