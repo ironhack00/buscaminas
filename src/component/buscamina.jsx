@@ -50,6 +50,9 @@ function Buscamina({ difficulty, playerName }) {
     placeMines(newBoard);
     calculateNearbyMines(newBoard);
     setBoard(newBoard);
+    setGameOver(false);
+    setPoints(0);
+    setFlags(0);
   };
 
   const placeMines = (board) => {
@@ -132,6 +135,10 @@ function Buscamina({ difficulty, playerName }) {
     setBoard(newBoard);
   };
 
+  const handleReset = () => {
+    initializeBoard();
+  };
+
   return (
     <div className="buscamina">
       <h1>Buscaminas</h1>
@@ -147,13 +154,14 @@ function Buscamina({ difficulty, playerName }) {
                 onClick={() => handleCellClick(x, y)}
                 onContextMenu={(e) => handleRightClick(e, x, y)}
               >
-                {cell.revealed ? (cell.isMine ? <img className='img' src="bomba.png" alt="aa" /> : (cell.nearbyMines > 0 ? cell.nearbyMines : '')) : (cell.flagged ? '🚩' : '')}
+                {cell.revealed ? (cell.isMine ? <img className='img' src={bombImage} alt="bomb" /> : (cell.nearbyMines > 0 ? cell.nearbyMines : '')) : (cell.flagged ? '🚩' : '')}
               </div>
             ))}
           </div>
         ))}
       </div>
-      {gameOver && <h2>Game Over, {playerName}! Total Points: {points}</h2>}
+      {gameOver && <h2 className='gameOver'>Game Over, {playerName}! Total Points: {points}</h2>}
+      <button onClick={handleReset}>Restart</button>
     </div>
   );
 }
