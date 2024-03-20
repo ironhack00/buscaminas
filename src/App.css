@@ -22,10 +22,12 @@ body {
   transition: background-image 4s ease-in-out; /* Transición suave de 1 segundo */
 }
 
+
 .overlay {
   position: relative;
   width: 100vw;
   height: 100vh;
+
 }
 
 .landing-page {
@@ -92,6 +94,7 @@ h1 {
   color: white; /* Cambia el color del texto del botón al hacer clic */
 }
 
+
 /* Animación para el botón */
 .button-enter {
   opacity: 0;
@@ -102,69 +105,4 @@ h1 {
   opacity: 1;
   transform: scale(1);
   transition: opacity 300ms, transform 300ms;
-}
-
-/* Estilos para el juego Buscamina */
-.buscamina {
-  text-align: center;
-  margin: 0 auto;
-  background-color: rgba(91, 89, 89, 0.264);
-  width: 80%; /* Modificamos el ancho para que se ajuste mejor en dispositivos móviles */
-  padding: 20px; /* Agregamos un poco de espacio interno */
-  border-radius: 10px; /* Agregamos bordes redondeados */
-}
-
-.board {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.row {
-  display: flex;
-}
-
-.cell {
-  width: 40px; /* Ancho inicial */
-  height: 40px;
-  border: 1px solid #ccc;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 1.2rem;
-  cursor: pointer;
-}
-
-.cell.revealed {
-  background-color: #eee;
-}
-
-.cell.flagged {
-  font-size: 1.5rem;
-}
-
-.cell.mine {
-  background-color: #ff0000;
-  color: #fff;
-}
-
-@media (max-width: 600px) {
-  .buscamina {
-    width: 90%; /* Reducimos el ancho aún más en dispositivos móviles */
-    padding: 10px; /* Reducimos el espacio interno */
-  }
-
-  .cell {
-    width: 30px; /* Ajustamos el ancho para pantallas pequeñas */
-    height: 30px;
-    font-size: 1rem;
-  }
-
-  h1 {
-    font-size: 2rem;
-  }
-
-  h2 {
-    font-size: 1.3rem;
-  }
 }

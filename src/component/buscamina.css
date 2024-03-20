@@ -1,15 +1,21 @@
+/* Estilos generales */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Comic Sans MS', cursive; /* Cambiar la tipografía a una divertida */
+}
+
+/* Contenedor principal */
 .buscamina {
   text-align: center;
   margin: 0 auto;
   background-color: rgba(91, 89, 89, 0.264);
-  width: 80%; /* Modificamos el ancho para que se ajuste mejor en dispositivos móviles */
-  padding: 20px; /* Agregamos un poco de espacio interno */
-  border-radius: 10px; /* Agregamos bordes redondeados */
+  width: 80%; /* Ancho predeterminado */
+  padding: 20px; /* Espacio interno */
+  border-radius: 10px; /* Bordes redondeados */
 }
 
-@media (max-width: 600px) {}
-
-
+/* Encabezados */
 h1 {
   font-size: 2.5rem;
   margin-bottom: 20px;
@@ -20,6 +26,7 @@ h2 {
   margin: 10px 0;
 }
 
+/* Tablero */
 .board {
   display: flex;
   flex-direction: column;
@@ -30,9 +37,10 @@ h2 {
   display: flex;
 }
 
+/* Celdas */
 .cell {
-  width: 40px;
-  height: 40px;
+  width: 40px; /* Ancho predeterminado */
+  height: 40px; /* Altura predeterminada */
   border: 1px solid #ccc;
   display: flex;
   justify-content: center;
@@ -41,25 +49,36 @@ h2 {
   cursor: pointer;
 }
 
+/* Celdas reveladas */
 .cell.revealed {
   background-color: #eee;
 }
 
+/* Celdas marcadas con bandera */
 .cell.flagged {
   font-size: 1.5rem;
 }
 
+/* Celdas con mina */
 .cell.mine {
   background-color: #ff0000;
   color: #fff;
 }
 
-@media (max-width: 600px) {
-  .buscamina {
-    width: 90%; /* Reducimos el ancho aún más en dispositivos móviles */
-    padding: 10px; /* Reducimos el espacio interno */
-  }
+/* Imágenes */
+.img {
+  width: 50%;
+  height: 50%;
+}
 
+/* Media queries */
+@media (max-width: 600px) {
+  /* Ajustes para dispositivos móviles */
+  .buscamina {
+    width: 90%;
+    padding: 10px;
+  }
+  
   .cell {
     width: 30px;
     height: 30px;
@@ -75,14 +94,9 @@ h2 {
   }
 }
 
-
-.img{
-  width: 50%;
-  height: 50%;
-}
-
 @media (max-width: 1820px) and (max-height: 800px) {
+  /* Ajustes adicionales para pantallas pequeñas */
   .buscamina {
-    background-color: transparent; /* Eliminamos el background-color en pantallas más pequeñas */
+    background-color: transparent;
   }
 }
