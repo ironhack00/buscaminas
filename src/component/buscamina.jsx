@@ -9,6 +9,7 @@ function Buscamina({ difficulty, playerName }) {
   const [gameOver, setGameOver] = useState(false);
   const [points, setPoints] = useState(0);
   const [flags, setFlags] = useState(0);
+  const [flagMode, setFlagMode] = useState(false); // Nuevo estado para el modo de colocación de banderas
 
   useEffect(() => {
     setDifficultySettings();
@@ -98,17 +99,21 @@ function Buscamina({ difficulty, playerName }) {
   const handleCellClick = (x, y) => {
     if (gameOver || board[x][y].revealed) return;
 
-    if (board[x][y].isMine) {
-      revealAllMines();
-      setGameOver(true);
+    if (flagMode) {
+      handleRightClick(null, x, y); // Llama a la función handleRightClick para colocar o quitar la bandera
     } else {
-      revealCell(x, y);
-      setPoints(points + 10);
+      if (board[x][y].isMine) {
+        revealAllMines();
+        setGameOver(true);
+      } else {
+        revealCell(x, y);
+        setPoints(points + 10);
+      }
     }
   };
 
   const handleRightClick = (e, x, y) => {
-    e.preventDefault();
+    e && e.preventDefault();
     if (gameOver || board[x][y].revealed) return;
 
     const newBoard = [...board];
@@ -144,6 +149,7 @@ function Buscamina({ difficulty, playerName }) {
       <h1 className='h1'>Minesweeper</h1>
       <h2 className='h2'>Points: {points}</h2>
       <h2 className='h2'>Flags: {flags}</h2>
+      <button className='flag-button' onClick={() => setFlagMode(!flagMode)}>Flag Mode: {flagMode ? 'On' : 'Off'}</button> {/* Botón para cambiar al modo de colocación de banderas */}
       <div className="board">
         {board.map((row, x) => (
           <div key={x} className="row">
@@ -161,8 +167,7 @@ function Buscamina({ difficulty, playerName }) {
         ))}
       </div>
       {gameOver && <h2 className='gameOver'>Game Over, {playerName}! Total Points: {points}</h2>}
-      { gameOver && <button onClick={handleReset}>Restart</button> }
-      
+      {gameOver && <button onClick={handleReset}>Restart</button>}
     </div>
   );
 }
