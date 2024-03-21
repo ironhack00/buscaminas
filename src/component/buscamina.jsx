@@ -161,7 +161,8 @@ function Buscamina({ difficulty, playerName }) {
         ))}
       </div>
       {gameOver && <h2 className='gameOver'>Game Over, {playerName}! Total Points: {points}</h2>}
-      <button onClick={handleReset}>Restart</button>
+      { gameOver && <button onClick={handleReset}>Restart</button> }
+      
     </div>
   );
 }
