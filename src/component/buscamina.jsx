@@ -142,8 +142,8 @@ function Buscamina({ difficulty, playerName }) {
   return (
     <div className="buscamina">
       <h1 className='h1'>Minesweeper</h1>
-      <h2>Points: {points}</h2>
-      <h2>Flags: {flags}</h2>
+      <h2 className='h2'>Points: {points}</h2>
+      <h2 className='h2'>Flags: {flags}</h2>
       <div className="board">
         {board.map((row, x) => (
           <div key={x} className="row">
